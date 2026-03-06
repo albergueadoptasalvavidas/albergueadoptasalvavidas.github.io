@@ -97,6 +97,44 @@ nav a:hover {
     color: white;
 }
 
+/* ===== SLIDER ===== */
+.slider {
+    position: relative;
+    width: 420px;
+}
+
+.slider img {
+    width: 100%;
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #7c2237;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.prev {
+    left: -20px;
+}
+
+.next {
+    right: -20px;
+}
+
+.prev:hover, .next:hover {
+    background-color: #5e1a29;
+}
+    
 /* BOTONES */
 .btn-adopta {
     background-color: #f2c23b;
@@ -453,7 +491,13 @@ nav a:hover {
         </div>
     </div>
 
-    <img src="perritos.jpg" alt="Perritos en adopción">
+    <div class="slider">
+        <button class="prev">&#10094;</button>
+        <a id="dog-link">
+        <img id="dog-image" src="perrito1.jpg" alt="Perrito en adopción">
+        </a>
+    <button class="next">&#10095;</button>
+    </div>
 </section>
 
 <!-- HISTORIA SECTION -->
@@ -595,6 +639,38 @@ menuToggle.addEventListener("click", function() {
     menu.classList.toggle("active");
 });
 </script>
-    
+
+<script>
+const dogs = [
+    { name: "Kira", image: "perrito1.jpg" },
+    { name: "Max", image: "perrito2.jpg" },
+    { name: "Luna", image: "perrito3.jpg" }
+];
+
+let currentIndex = 0;
+
+const dogImage = document.getElementById("dog-image");
+const dogLink = document.getElementById("dog-link");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
+
+function updateDog() {
+    dogImage.src = dogs[currentIndex].image;
+    dogLink.href = `heroe.html?dog=${dogs[currentIndex].name}`;
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % dogs.length;
+    updateDog();
+});
+
+prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + dogs.length) % dogs.length;
+    updateDog();
+});
+
+updateDog();
+</script>
+
 </body>
 </html>
